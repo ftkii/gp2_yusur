@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "537615400211",
+    "project_id": "yusur-af4e4",
+    "storage_bucket": "yusur-af4e4.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:537615400211:android:160eeb1828798aa2ae6ee6",
+        "android_client_info": {
+          "package_name": "com.example.yusur_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAORuWa3LTdUVDg6HEQoTqN7lnCqgQkYXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
