@@ -1,0 +1,2 @@
+C:/Users/ghyou/Documents/GitHub/gp2_yusur/android/app/.cxx/RelWithDebInfo/k2l6dx4u/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/ghyou/Documents/GitHub/gp2_yusur/android/app/.cxx/RelWithDebInfo/k2l6dx4u/armeabi-v7a/CMakeFiles/rebuild_cache.dir

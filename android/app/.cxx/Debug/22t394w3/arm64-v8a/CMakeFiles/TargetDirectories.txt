@@ -1,0 +1,2 @@
+C:/Users/ghyou/Documents/GitHub/gp2_yusur/android/app/.cxx/Debug/22t394w3/arm64-v8a/CMakeFiles/edit_cache.dir
+C:/Users/ghyou/Documents/GitHub/gp2_yusur/android/app/.cxx/Debug/22t394w3/arm64-v8a/CMakeFiles/rebuild_cache.dir

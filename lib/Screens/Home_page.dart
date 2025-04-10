@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yusur_app/Screens/fatwa_screen.dart';
 import 'package:yusur_app/Screens/manasik_screen.dart';
 import 'package:yusur_app/Screens/prayer_time.dart';
@@ -10,7 +13,9 @@ import 'package:yusur_app/widget/FeaturedServices.dart';
 import 'package:yusur_app/widget/card.dart';
 import 'package:yusur_app/widget/menu.dart';
 import 'package:yusur_app/widget/nav_bar.dart';
-import 'package:yusur_app/Screens/global.dart'; // استدعاء المتغير العام
+import 'package:yusur_app/Screens/global.dart';
+
+import 'quran/view_surah.dart'; // استدعاء المتغير العام
 
 class HomePage extends StatefulWidget {
   @override
@@ -19,6 +24,27 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectedIndex = 0;
+  var widgetJsonData;
+
+  loadJsonAssets() async {
+    final String jsonString = await rootBundle.loadString(
+      "assets/json/surahs.json",
+    );
+    var data = jsonDecode(jsonString);
+    setState(() {
+      widgetJsonData = data;
+    });
+    final String jsonString2 = await rootBundle.loadString(
+      "assets/json/quarters.json",
+    );
+    var data2 = jsonDecode(jsonString2);
+  }
+
+  @override
+  void initState() {
+    loadJsonAssets();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.white,
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Image.asset("images/yusur_logo.png", height: 60),
+        title: Image.asset("assets/images/yusur_logo.png", height: 60),
       ),
       body: ListView(
         padding: EdgeInsets.all(25),
@@ -45,26 +71,42 @@ class _HomePageState extends State<HomePage> {
           ),
           FeaturedService(
             items: [
-              {'text': 'Quran', 'image': 'images/Vector.png'},
+              {
+                'text': 'Quran',
+                'image': 'assets/images/Vector.png',
+                'page': ViewSurah(jsonData: widgetJsonData),
+              },
+              /* {
+                'text': 'Profile',
+                'image': 'assets/images/Profile.png',
+                'page': Profile(),
+              }, */
+              {
+                'text': 'Hajj & Umrah',
+                'image': 'assets/images/Hajj.png',
+                'page': Reginfo(),
+              },
+              {'text': 'Dua & Azkar', 'image': 'assets/images/Dua.png'},
+              {'text': 'Zakat', 'image': 'assets/images/Zakat.png'},
               {
                 'text': 'Qibla Direction',
-                'image': 'images/Qibla.png',
+                'image': 'assets/images/Qibla.png',
                 'page': QiblaDirectionScreen(),
               },
-              {'text': 'Map', 'image': 'images/Map.png'},
+              {'text': 'Map', 'image': 'assets/images/Map.png'},
               {
                 'text': 'Prayer Time',
-                'image': 'images/Prayer.png',
+                'image': 'assets/images/Prayer.png',
                 'page': PrayerTime(),
               },
               {
                 'text': 'Fatwas',
-                'image': 'images/fatwas.png',
+                'image': 'assets/images/fatwas.png',
                 'page': FatwaScreen(),
               },
               {
                 'text': 'Manasik',
-                'image': 'images/Manasik.png',
+                'image': 'assets/images/Manasik.png',
                 'page': ManasikScreen(),
               },
             ],

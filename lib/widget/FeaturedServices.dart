@@ -3,10 +3,7 @@ import 'package:flutter/material.dart';
 class FeaturedService extends StatelessWidget {
   final List<Map<String, dynamic>> items;
 
-  const FeaturedService({
-    Key? key,
-    required this.items,
-  }) : super(key: key);
+  const FeaturedService({Key? key, required this.items}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,9 +11,7 @@ class FeaturedService extends StatelessWidget {
       child: Container(
         width: 500,
         height: 400,
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
-        ),
+        decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
         child: GridView.builder(
           padding: const EdgeInsets.all(10),
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -29,22 +24,16 @@ class FeaturedService extends StatelessWidget {
           itemBuilder: (context, index) {
             if (index == items.length) {
               // عنصر أخير لإضافة مساحة
-              return const SizedBox(
-                height: 50,
-              );
+              return const SizedBox(height: 50);
             }
             final item = items[index];
             return GestureDetector(
               onTap: () {
                 // عند الضغط على العنصر
                 Navigator.push(
-                    context,
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => item['page'],
-                      ),
-                    ) as Route<Object?>);
+                  context,
+                  MaterialPageRoute(builder: (context) => item['page']),
+                );
               },
               child: Container(
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -63,23 +52,19 @@ class FeaturedService extends StatelessWidget {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
-                          Image.asset(
-                            item["image"],
-                            width: 50,
-                            height: 50,
-                          ),
-                          SizedBox(
-                            width: 60,
-                          ),
+                          Image.asset(item["image"], width: 50, height: 50),
+                          SizedBox(width: 60),
                           Text(
                             item['text'],
                             style: const TextStyle(
-                                color: Colors.black, fontSize: 18),
+                              color: Colors.black,
+                              fontSize: 18,
+                            ),
                             textAlign: TextAlign.center,
                           ),
                         ],
                       ),
-                    )
+                    ),
                   ],
                 ),
               ),

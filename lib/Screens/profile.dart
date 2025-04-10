@@ -99,7 +99,11 @@ class _ProfileState extends State<Profile> {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     SizedBox(height: 40),
-                    Image.asset("images/yusur_logo.png", height: 90, width: 90),
+                    Image.asset(
+                      "assets/images/yusur_logo.png",
+                      height: 90,
+                      width: 90,
+                    ),
                     SizedBox(height: 20),
                     Text(
                       "Your Profile",

@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:yusur_app/Screens/Pilgrim_Information.dart';
 import 'package:yusur_app/Screens/campaign.dart';
 import 'package:yusur_app/Screens/fatwa_screen.dart';
@@ -10,6 +13,8 @@ import 'package:yusur_app/widget/card.dart';
 import 'package:yusur_app/widget/menu.dart';
 import 'package:yusur_app/widget/nav_bar.dart';
 
+import 'quran/view_surah.dart';
+
 class HomePageTwo extends StatefulWidget {
   final String pilgrimID;
   const HomePageTwo({super.key, required this.pilgrimID});
@@ -20,6 +25,28 @@ class HomePageTwo extends StatefulWidget {
 
 class _HomePageTwoState extends State<HomePageTwo> {
   int selectedIndex = 0;
+  var widgetJsonData;
+
+  loadJsonAssets() async {
+    final String jsonString = await rootBundle.loadString(
+      "assets/json/surahs.json",
+    );
+    var data = jsonDecode(jsonString);
+    setState(() {
+      widgetJsonData = data;
+    });
+    final String jsonString2 = await rootBundle.loadString(
+      "assets/json/quarters.json",
+    );
+    var data2 = jsonDecode(jsonString2);
+  }
+
+  @override
+  void initState() {
+    loadJsonAssets();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,7 +72,11 @@ class _HomePageTwoState extends State<HomePageTwo> {
           ),
           FeaturedService(
             items: [
-              {'text': 'Quran', 'image': 'images/Vector.png'},
+              {
+                'text': 'Quran',
+                'image': 'assets/images/Vector.png',
+                'page': ViewSurah(jsonData: widgetJsonData),
+              },
               {
                 'text': 'Qibla Direction',
                 'image': 'images/Qibla.png',

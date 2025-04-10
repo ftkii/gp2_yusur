@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yusur_app/Screens/Home_page.dart';
 import 'package:yusur_app/Screens/Home_page_two.dart';
@@ -26,37 +25,9 @@ class _PilgrimInformationState extends State<PilgrimInformation> {
     );
   }
 
-  // استرجاع بيانات الحاج من Firestore
-  void fetchPilgrimData() async {
-    setState(() {
-      isLoading = true;
-    });
-
-    try {
-      await FirebaseFirestore.instance.collection('Pilgrim').get().then((
-        value,
-      ) {
-        value.docs.forEach((element) {
-          if (element['id'] == widget.pilgrimID) {
-            setState(() {
-              pilgrimData = element.data() as Map<String, dynamic>?;
-              isLoading = false;
-            });
-          }
-        });
-      });
-    } catch (e) {
-      setState(() {
-        isLoading = false;
-      });
-      print("Error: $e");
-    }
-  }
-
   @override
   void initState() {
     super.initState();
-    fetchPilgrimData();
   }
 
   @override

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:yusur_app/Screens/Home_page_two.dart';
 import 'package:yusur_app/Screens/sign_in.dart';
@@ -17,7 +16,6 @@ class _LoginPageState extends State<LoginPage> {
 
   final _idController = TextEditingController();
   final _passwordController = TextEditingController();
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   void _login() async {
     final String pilgrimID = _idController.text.trim();
@@ -26,29 +24,6 @@ class _LoginPageState extends State<LoginPage> {
     if (pilgrimID.isEmpty || password.isEmpty) {
       _showMessage("Please fill in all fields.");
       return;
-    }
-
-    try {
-      // البحث عن بيانات الحاج في Firestore
-      final querySnapshot =
-          await _firestore
-              .collection('Pilgrim')
-              .where('id', isEqualTo: pilgrimID)
-              .where('password', isEqualTo: password)
-              .get();
-
-      if (querySnapshot.docs.isNotEmpty) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-            builder: (context) => HomePageTwo(pilgrimID: pilgrimID),
-          ),
-        );
-      } else {
-        _showMessage("Pilgrim ID or password is incorrect.");
-      }
-    } catch (e) {
-      _showMessage("An error occurred: $e");
     }
   }
 
