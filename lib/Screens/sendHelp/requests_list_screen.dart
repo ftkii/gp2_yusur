@@ -21,7 +21,9 @@ class _RequestsListScreenState extends State<RequestsListScreen> {
   }
 
   Future<void> _fetchRequests() async {
-    final url = Uri.parse("https://code-builders.space/fluttertest/get_requests.php");
+    final url = Uri.parse(
+      "https://code-builders.space/fluttertest/get_requests.php",
+    );
 
     try {
       final response = await http.get(url);
@@ -58,11 +60,15 @@ class _RequestsListScreenState extends State<RequestsListScreen> {
 
           if (latitude != null && longitude != null) {
             try {
-              List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+              List<Placemark> placemarks = await placemarkFromCoordinates(
+                latitude,
+                longitude,
+              );
               if (placemarks.isNotEmpty) {
                 Placemark place = placemarks[0];
                 setState(() {
-                  _locationsMap[i] = "${place.street}, ${place.locality}, ${place.country}";
+                  _locationsMap[i] =
+                      "${place.street}, ${place.locality}, ${place.country}";
                 });
               }
             } catch (e) {
@@ -83,16 +89,17 @@ class _RequestsListScreenState extends State<RequestsListScreen> {
   void _showError(String message) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text("Error"),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("OK"),
+      builder:
+          (context) => AlertDialog(
+            title: Text("Error"),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text("OK"),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
@@ -103,36 +110,43 @@ class _RequestsListScreenState extends State<RequestsListScreen> {
         title: Text("Help Requests"),
         backgroundColor: Color(0xFF9A9185),
       ),
-      body: _isLoading
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-        itemCount: _requests.length,
-        itemBuilder: (context, index) {
-          final request = _requests[index];
-          final locationText = _locationsMap.containsKey(index)
-              ? _locationsMap[index]
-              : "Loading..."; // إظهار العنوان أو رسالة التحميل
+      body:
+          _isLoading
+              ? Center(child: CircularProgressIndicator())
+              : ListView.builder(
+                itemCount: _requests.length,
+                itemBuilder: (context, index) {
+                  final request = _requests[index];
+                  final locationText =
+                      _locationsMap.containsKey(index)
+                          ? _locationsMap[index]
+                          : "Loading..."; // إظهار العنوان أو رسالة التحميل
 
-          return Card(
-            elevation: 3,
-            margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-            child: ListTile(
-              leading: Icon(Icons.location_on, color: Colors.red),
-              title: Text(request["user_name"], style: TextStyle(fontWeight: FontWeight.bold)),
-              subtitle: Text(locationText ?? "Unknown location"),
-              trailing: Icon(Icons.arrow_forward_ios),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => RequestDetailsScreen(request: request),
-                  ),
-                );
-              },
-            ),
-          );
-        },
-      ),
+                  return Card(
+                    elevation: 3,
+                    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                    child: ListTile(
+                      leading: Icon(Icons.location_on, color: Colors.red),
+                      title: Text(
+                        request["user_name"],
+                        style: TextStyle(fontWeight: FontWeight.bold),
+                      ),
+                      subtitle: Text(locationText ?? "Unknown location"),
+                      trailing: Icon(Icons.arrow_forward_ios),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder:
+                                (context) =>
+                                    RequestDetailsScreen(request: request),
+                          ),
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
     );
   }
 }

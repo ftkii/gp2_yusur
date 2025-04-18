@@ -16,7 +16,8 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
 
   // 🟢 دالة لحفظ الحادث في قاعدة البيانات عبر PHP
   Future<void> saveIncident() async {
-    String url = "https://code-builders.space/fluttertest/save_incident.php"; // استبدل بالرابط الفعلي
+    String url =
+        "https://code-builders.space/fluttertest/save_incident.php"; // استبدل بالرابط الفعلي
 
     try {
       var response = await http.post(
@@ -35,7 +36,8 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => const CurrentIncidentScreen(hasIncident: true),
+            builder:
+                (context) => const CurrentIncidentScreen(hasIncident: true),
           ),
         );
       } else {
@@ -47,9 +49,9 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
   }
 
   void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -61,7 +63,10 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 20,
+                ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -75,7 +80,10 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
                         const Spacer(),
                         const Text(
                           'Ambulance Request',
-                          style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const Spacer(),
                       ],
@@ -99,7 +107,10 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
                     const SizedBox(height: 20),
 
                     // 🔹 اختيار المصاب
-                    const Text("Who is the injured person?", style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text(
+                      "Who is the injured person?",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 10),
                     Row(
                       children: [
@@ -111,21 +122,30 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
                     const SizedBox(height: 20),
 
                     // 🔹 اختيار الموقع
-                    const Text("The incident location?", style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text(
+                      "The incident location?",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 10),
                     _buildTextField(location, "Edit"),
 
                     const SizedBox(height: 20),
 
                     // 🔹 اختيار عدد المصابين
-                    const Text("The number?", style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text(
+                      "The number?",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 10),
                     _buildNumberSelector(),
 
                     const SizedBox(height: 20),
 
                     // 🔹 اختيار تصنيف الحادث
-                    const Text("Incident category", style: TextStyle(fontWeight: FontWeight.bold)),
+                    const Text(
+                      "Incident category",
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                     const SizedBox(height: 10),
 
                     GridView.count(
@@ -184,7 +204,8 @@ class _CreateIncidentScreenState extends State<CreateIncidentScreen> {
           });
         },
         style: ElevatedButton.styleFrom(
-          backgroundColor: selectedPerson == label ? Colors.blue : Colors.grey[300],
+          backgroundColor:
+              selectedPerson == label ? Colors.blue : Colors.grey[300],
           foregroundColor: Colors.black,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),

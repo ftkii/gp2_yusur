@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:location/location.dart';
+import 'package:yusur_app/Screens/campaign.dart';
 import 'requests_list_screen.dart'; // صفحة الطلبات
 
 class HelpRequestScreen extends StatefulWidget {
@@ -30,18 +31,25 @@ class _HelpRequestScreenState extends State<HelpRequestScreen> {
       String longitude = userLocation.longitude.toString();
       String locationText = "$latitude, $longitude";
 
-      final url = Uri.parse("https://code-builders.space/fluttertest/add_request.php");
-      final response = await http.post(url, body: {
-        "user_name": _nameController.text,
-        "location": locationText,
-      });
+      final url = Uri.parse(
+        "https://code-builders.space/fluttertest/add_request.php",
+      );
+      final response = await http.post(
+        url,
+        body: {"user_name": _nameController.text, "location": locationText},
+      );
 
       final responseData = json.decode(response.body);
 
       if (response.statusCode == 200 && responseData["status"] == "success") {
+        _showDialog(
+          "Success",
+          responseData["message"] ?? "Operation successful",
+        );
+
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => RequestsListScreen()),
+          MaterialPageRoute(builder: (context) => Campaign()),
         );
       } else {
         _showDialog("Error", responseData["message"] ?? "Unknown error");
@@ -81,26 +89,24 @@ class _HelpRequestScreenState extends State<HelpRequestScreen> {
   void _showDialog(String title, String message) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        title: Text(title),
-        content: Text(message),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.pop(context),
-            child: Text("OK"),
+      builder:
+          (context) => AlertDialog(
+            title: Text(title),
+            content: Text(message),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: Text("OK"),
+              ),
+            ],
           ),
-        ],
-      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Help Request"),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text("Help Request"), centerTitle: true),
       body: Padding(
         padding: EdgeInsets.all(20),
         child: Column(
@@ -117,9 +123,9 @@ class _HelpRequestScreenState extends State<HelpRequestScreen> {
             _isLoading
                 ? CircularProgressIndicator()
                 : ElevatedButton(
-              onPressed: _requestHelp,
-              child: Text("Send My Location"),
-            ),
+                  onPressed: _requestHelp,
+                  child: Text("Send My Location"),
+                ),
           ],
         ),
       ),

@@ -7,7 +7,7 @@ import 'package:yusur_app/Screens/insertPilgrim.dart';
 import 'package:yusur_app/Screens/Login_page.dart';
 import 'package:yusur_app/Screens/add_news.dart';
 import 'package:yusur_app/Screens/add_schedule.dart';
-import 'package:yusur_app/Screens/help_request_screen.dart';
+import 'sendHelp/requests_list_screen.dart';
 import 'package:yusur_app/Screens/ListOfPilgrimScreen.dart';
 import 'package:yusur_app/Screens/campaign_news.dart';
 import 'package:yusur_app/Screens/campaign_schedule.dart';

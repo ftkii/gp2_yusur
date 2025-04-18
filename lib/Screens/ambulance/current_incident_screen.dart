@@ -33,7 +33,8 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
 
   // 🟢 دالة جلب بيانات الحادث من قاعدة البيانات
   Future<void> fetchIncidentDetails() async {
-    String url = "https://code-builders.space/fluttertest/get_incident.php"; // 🔹 استبدل بالرابط الفعلي
+    String url =
+        "https://code-builders.space/fluttertest/get_incident.php"; // 🔹 استبدل بالرابط الفعلي
 
     try {
       var response = await http.get(Uri.parse(url));
@@ -45,10 +46,12 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
 
         if (data["status"] == "success" && data.containsKey("incident")) {
           setState(() {
-            incidentNumber = data["incident"]["id"];  // 🔹 استخدم "id" بدلاً من "incident_number"
+            incidentNumber =
+                data["incident"]["id"]; // 🔹 استخدم "id" بدلاً من "incident_number"
             location = data["incident"]["location"];
             numberOfInjured = data["incident"]["injured_count"];
-            status = data["incident"]["category"];  // 🔹 قد تحتاج لتحديث "status" حسب نوع البيانات المتاحة
+            status =
+                data["incident"]["category"]; // 🔹 قد تحتاج لتحديث "status" حسب نوع البيانات المتاحة
             isLoading = false;
             hasIncident = true;
           });
@@ -72,9 +75,9 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
   }
 
   void _showMessage(String message) {
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text(message)),
-    );
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -115,11 +118,14 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
 
             // 🔹 عرض تفاصيل الحادث أو رسالة "لا يوجد حادث"
             Expanded(
-              child: isLoading
-                  ? const Center(child: CircularProgressIndicator()) // 🔄 مؤشر تحميل
-                  : hasIncident
-                  ? _buildIncidentDetails()
-                  : _buildNoIncident(),
+              child:
+                  isLoading
+                      ? const Center(
+                        child: CircularProgressIndicator(),
+                      ) // 🔄 مؤشر تحميل
+                      : hasIncident
+                      ? _buildIncidentDetails()
+                      : _buildNoIncident(),
             ),
           ],
         ),
@@ -154,7 +160,11 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
             children: [
               const Text(
                 "Incident Details",
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
               ),
               const SizedBox(height: 5),
               const Divider(color: Colors.black54),
@@ -173,10 +183,12 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
                     "Update",
                     const Color(0xFF9A9185),
                     Colors.black,
-                        () async {
+                    () async {
                       final result = await Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CreateIncidentScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => CreateIncidentScreen(),
+                        ),
                       );
 
                       if (result != null && result is Map<String, String>) {
@@ -189,7 +201,7 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
                     "Cancel",
                     const Color(0xFF9A9185),
                     Colors.black,
-                        () {
+                    () {
                       setState(() {
                         hasIncident = false;
                       });
@@ -213,10 +225,15 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
           children: [
             TextSpan(
               text: "$label ",
-              style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold, color: Colors.black),
+              style: const TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             TextSpan(
-              text: value.isNotEmpty ? value : "N/A",  // 🔹 تجنب عرض بيانات فارغة
+              text:
+                  value.isNotEmpty ? value : "N/A", // 🔹 تجنب عرض بيانات فارغة
               style: const TextStyle(fontSize: 13, color: Colors.black87),
             ),
           ],
@@ -226,7 +243,12 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
   }
 
   // 🔹 زر الإجراءات (تحديث أو إلغاء)
-  Widget _buildActionButton(String text, Color bgColor, Color textColor, VoidCallback onPressed) {
+  Widget _buildActionButton(
+    String text,
+    Color bgColor,
+    Color textColor,
+    VoidCallback onPressed,
+  ) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: bgColor,
@@ -236,7 +258,10 @@ class _CurrentIncidentScreenState extends State<CurrentIncidentScreen> {
         elevation: 0,
       ),
       onPressed: onPressed,
-      child: Text(text, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold)),
+      child: Text(
+        text,
+        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+      ),
     );
   }
 

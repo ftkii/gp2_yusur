@@ -4,13 +4,23 @@ import 'package:yusur_app/Screens/Home_page_two.dart';
 import 'package:yusur_app/Screens/ListOfPilgrimScreen.dart';
 import 'package:yusur_app/Screens/campaign_schedule.dart';
 import 'package:yusur_app/Screens/profile.dart';
-import 'package:yusur_app/Screens/request_details_screen.dart';
-import 'package:yusur_app/Screens/requests_list_screen.dart';
+import 'package:yusur_app/Screens/sendHelp/request_details_screen.dart';
+import 'package:yusur_app/Screens/sendHelp/requests_list_screen.dart';
 import 'package:yusur_app/widget/contain.dart';
+import '../widget/nav_bar.dart';
 import 'campaign_news_page.dart';
+import 'regInfo.dart';
+import 'sign_in.dart';
 
-class Campaign extends StatelessWidget {
-  const Campaign({super.key});
+class Campaign extends StatefulWidget {
+  Campaign({super.key});
+
+  @override
+  State<Campaign> createState() => _CampaignState();
+}
+
+class _CampaignState extends State<Campaign> {
+  int selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -150,6 +160,28 @@ class Campaign extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: CustomNavBar(
+        selectedIndex: selectedIndex,
+        onTabSelected: (index) {
+          setState(() {
+            selectedIndex = index;
+          });
+          // التنقل بين الصفحات بناءً على التحديد
+          if (index == 0) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(builder: (context) => SignIn()),
+            );
+          } else if (index == 1) {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Reginfo(), // صفحة معلومات التسجيل
+              ),
+            );
+          }
+        },
       ),
     );
   }

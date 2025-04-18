@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'create_incident_screen.dart';
-import 'current_incident_screen.dart';
+import 'ambulance/create_incident_screen.dart';
+import 'ambulance/current_incident_screen.dart';
 
 class AmbulanceRequestScreen extends StatelessWidget {
   @override
@@ -27,10 +27,7 @@ class AmbulanceRequestScreen extends StatelessWidget {
                 ),
                 const Text(
                   'Ambulance Request',
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -53,7 +50,7 @@ class AmbulanceRequestScreen extends StatelessWidget {
               style: TextStyle(fontSize: 14, color: Colors.black87),
             ),
             const SizedBox(height: 60),
-            
+
             // زر إنشاء حادث جديد
             SizedBox(
               width: 350,
@@ -82,7 +79,7 @@ class AmbulanceRequestScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            
+
             // زر عرض الحوادث الحالية
             SizedBox(
               width: 350,
@@ -100,7 +97,9 @@ class AmbulanceRequestScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const CurrentIncidentScreen(hasIncident: false),
+                      builder:
+                          (context) =>
+                              const CurrentIncidentScreen(hasIncident: false),
                     ),
                   );
                 },

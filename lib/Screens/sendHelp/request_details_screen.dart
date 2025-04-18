@@ -27,11 +27,15 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
         double longitude = double.tryParse(coords[1]) ?? 0.0;
 
         try {
-          List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+          List<Placemark> placemarks = await placemarkFromCoordinates(
+            latitude,
+            longitude,
+          );
           if (placemarks.isNotEmpty) {
             Placemark place = placemarks[0];
             setState(() {
-              _locationAddress = "${place.street}, ${place.locality}, ${place.country}";
+              _locationAddress =
+                  "${place.street}, ${place.locality}, ${place.country}";
             });
           } else {
             setState(() {
@@ -66,7 +70,9 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
         padding: EdgeInsets.all(20),
         child: Card(
           elevation: 5,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
           child: Padding(
             padding: EdgeInsets.all(20),
             child: Column(
@@ -82,9 +88,15 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                 SizedBox(height: 20),
                 _buildDetailRow("User Name:", widget.request["user_name"]),
                 SizedBox(height: 10),
-                _buildDetailRow("Location:", _locationAddress), // تم التعديل هنا
+                _buildDetailRow(
+                  "Location:",
+                  _locationAddress,
+                ), // تم التعديل هنا
                 SizedBox(height: 10),
-                _buildDetailRow("Request Time:", widget.request["created_at"] ?? "N/A"),
+                _buildDetailRow(
+                  "Request Time:",
+                  widget.request["created_at"] ?? "N/A",
+                ),
                 SizedBox(height: 20),
                 _buildDetailRow("Request status:", widget.request["status"]),
                 SizedBox(height: 20),
@@ -95,7 +107,10 @@ class _RequestDetailsScreenState extends State<RequestDetailsScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF9A9185),
-                      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 30,
+                        vertical: 12,
+                      ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(30),
                       ),
